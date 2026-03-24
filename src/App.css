@@ -1,0 +1,280 @@
+.App {
+  text-align: center;
+  background-image: url(https://files.123freevectors.com/wp-content/resized/207533-brown-abstract-background-design.jpg);
+}
+  
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 10vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+header{
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   padding: 15px 40px;
+   background: #C0AB9A;
+   position: sticky;
+   top: 0;
+   z-index: 1000;
+}
+
+.form input{
+  margin-left: 400px;
+  width: 100%;
+  padding: 10px 10px 10px 30px;
+  border: none;
+  position: relative;
+  margin-bottom: 15px;
+ }
+
+ .form{
+  color: black;
+  background: transparent;
+  padding: 5px;
+  transform: matrix();
+  border-radius: 10px;
+  width: 350px;
+}
+
+.product_img{
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.product_imgg{
+  width: 50%;
+  height: 500px;
+  object-fit: fill;
+  border-radius: 10px;
+  margin-left: 200px;
+}
+
+
+.btnz{
+    color: #00010a;
+    padding: 10px 40px;
+    text-decoration: none;
+    font-weight: 900;
+    font-weight: bold;
+    transition-property: background-color, color;
+    transition-duration: .3s;
+}
+
+.btnz:hover{
+    background-color: transparent;
+    color: #EFE8E2;
+}
+
+.boxx{
+  background-color: #181716;
+  padding: 30px;
+  border-radius: 10px;
+  width: 600px;
+  height: 420px;
+  margin-left: 360px;
+}
+
+
+.title{
+  color: #171411;
+  font-size: 45px;
+  font-weight: bold;
+  text-decoration: none;
+  font-family: 'Arial', sans-serif;
+  
+}
+ 
+.my-card {
+  background: #EFE8E2;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px #636160;
+  margin-top: 10px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.my-add-product{
+  background: #EFE8E2;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px #636160;
+  width: 100%;
+  margin: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.my-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px #3F3027;
+  background: #e4bf9f;
+}
+
+.heading{
+  color: #171411;
+  font-size: 30px;
+  font-weight: bolder;
+  text-decoration: none;
+  font-family: 'Inter', sans-serif;
+  margin-bottom: 20px;
+  margin-left: 30px;
+}
+
+.card-body{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  color: #171411;
+}
+
+.purchase{
+  background-color: #353027;
+  color: #EFE8E2;
+  padding: 10px 20px;
+  border: 1px solid #C0AB9A;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  transition-property: background-color, color;
+  transition-duration: .3s;
+}
+
+.purchase:hover{  
+  background-color: #C0AB9A;
+  color: #171411;
+  border: none;
+}
+ 
+/* form button */
+.purchasee{
+  width: 50%;
+  margin-left: 190px;
+  margin-right: 150px;
+  background-color: #353027;
+  color: #EFE8E2;
+  padding: 10px 20px;
+  border: 1px solid #C0AB9A;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  transition-property: background-color, border-color;
+}
+
+.purchasee:hover{  
+  background-color: #C0AB9A;
+  color: #353027;
+  border-color: #353027;
+
+}
+
+.namess{
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #7B5C4B;
+}
+
+/* footer */
+.emo-footer {
+  background-color: #3F3027;
+  padding: 50px 20px;
+  margin-top: 60px;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  max-width: 900px;
+  margin: auto;
+  flex-wrap: wrap; 
+}
+
+.footer-col {
+  flex: 1;
+  min-width: 250px;
+}
+
+.footer-col h3 {
+  font-family: 'Arial', sans-serif;
+  margin-bottom: 15px;
+  color: #171411;
+  font-weight: bolder;
+}
+
+.footer-col p {
+  font-size: 13px;
+  color: #a1a1a1;
+  line-height: 1.6;
+}
+
+.emo-copy {
+  text-align: center;
+  font-size: 11px;
+  color: #666;
+  margin-top: 30px;
+}
+
+hr{
+  background-color: #EFE8E2;
+}
+ 
+/* forms */
+.custom-col {
+  width: 50%;
+}
+
+@media (min-width: 708px) {
+  .custom-col {
+    width: 50%;
+  }
+}
+
+.custom-card {
+  background: #EFE8E2;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px #171411;
+  margin-left: 230px;
+  margin-right: 230px;
+  padding: 24px;
+}
+
+.your-labubu{
+  color: #61dafb;
+}
