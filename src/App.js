@@ -10,6 +10,7 @@ import Products from './components/Products';
 import Mpesapayment from './components/Mpesapayment';
 
 
+
 function App() {
   
   return (
@@ -18,12 +19,15 @@ function App() {
          <div>
             <Link to="#" className='title'><b>LaBubu</b></Link>
         </div>
+
+        
       <nav>
        
         <Link to="/" className='btnz'><b>Products</b></Link>
         <Link to="/addproduct" className='btnz'><b>Add a LaBubu</b></Link>
         <Link to="/signin" className='btnz'><b>Login</b></Link>
-         <Link to="/signup"  className='btnz'><b>Signup</b></Link>
+        <Link to="/signup"  className='btnz'><b>Signup</b></Link>
+        
       </nav>
      
       </header>
@@ -33,6 +37,7 @@ function App() {
         <Route path='/' element={<Products/>}/>
         <Route path='/addproduct' element={<Addproduct/>}/>
         <Route path='/makepayment' element={<Mpesapayment/>}/>
+       
       </Routes>
        
       

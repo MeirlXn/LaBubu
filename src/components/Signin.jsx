@@ -49,6 +49,10 @@ const Signin = () => {
         <div className='custom-card'>
         <h3 className='text-center'><b>Login</b></h3>
 
+        <h4 className="text-success">{success}</h4>
+         <h4 className="text-danger">{error}</h4>
+          <h4 className="text-info">{loading}</h4>
+
 
         <form action="" onSubmit={handleSignin}>
           <input type="email" placeholder='Enter Email' className='form-control' onChange={(e)=>setEmail(e.target.value)}/><br />

@@ -52,6 +52,11 @@ const Signup = () => {
             <div className='custom-card'>
             <h3 className='text-center'><b>Signup</b></h3>
 
+             <h4 className="text-success">{success}</h4>
+         <h4 className="text-danger">{error}</h4>
+          <h4 className="text-info">{loading}</h4>
+
+
               <form action="" onSubmit={submitSignupDetails}>                                  
                   <input
                     type="text" 
