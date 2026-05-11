@@ -40,7 +40,7 @@ const handleSubmit = async(e)=>{
       {error}
 
       {/* Make payment body */}
-  
+ 
       <div className='custom-col'>
         <div className='custom-card'>
         <img src={img_url + product.product_photo} alt={product.product_photo} className='product_imgg' />
@@ -51,8 +51,8 @@ const handleSubmit = async(e)=>{
         {/* mpesa payment form */}
         <form action="" onSubmit={handleSubmit}>
           <label htmlFor=""></label>
-          <input 
-            type="tel" 
+          <input
+            type="tel"
             placeholder='enter phonenumber'
             className='form-control'
             onChange={(e)=>setPhone(e.target.value)}

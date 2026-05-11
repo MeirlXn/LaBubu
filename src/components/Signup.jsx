@@ -40,70 +40,65 @@ const Signup = () => {
 
     } catch (error) {
       setError(error.message)
-      
+     
     }
   }
 
   return (
      <div className='row justify-content-center'>
-      
+     
           <div className='custom-col'>
             <br /><br />
             <div className='custom-card'>
             <h3 className='text-center'><b>Signup</b></h3>
 
-             <h4 className="text-success">{success}</h4>
-         <h4 className="text-danger">{error}</h4>
-          <h4 className="text-info">{loading}</h4>
-
-
               <form action="" onSubmit={submitSignupDetails}>                                  
                   <input
-                    type="text" 
-                    placeholder='Enter Username' 
-                    className='form-control' 
+                    type="text"
+                    placeholder='Enter Username'
+                    className='form-control'
                     onChange={(e)=>setUsername(e.target.value)}
                    />
                    <br />    
-              
-                  <input 
-                    type="tel" 
-                    placeholder='Enter Phonenumber' 
-                    className='form-control' 
+             
+                  <input
+                    type="tel"
+                    placeholder='Enter Phonenumber'
+                    className='form-control'
                     onChange={(e)=>setPhone(e.target.value)}
                   />
-                  <br /> 
-                
-                  <input 
-                    type="email" 
-                    placeholder='Enter Email' 
-                    className='form-control' 
+                  <br />
+               
+                  <input
+                    type="email"
+                    placeholder='Enter Email'
+                    className='form-control'
                     onChange={(e)=>setEmail(e.target.value)}
                   />
                   <br />
-                  
-                  <input 
-                    type="password" 
-                    placeholder='Enter Password' 
-                    className='form-control' 
+                 
+                  <input
+                    type="password"
+                    placeholder='Enter Password'
+                    className='form-control'
                     onChange={(e)=>setPassword(e.target.value)}
                   />
                   <br />
-                  
-                  <input 
-                    type="submit" 
-                    value="Done" 
+                 
+                  <input
+                    type="submit"
+                    value="Done"
                     className='purchasee'
                   />
                   <br />
-              
+             
                   {/* incase someone has an account */}
-                  <Link to='/signin'>Already have an account? Login</Link>
+                  <Link to='/signin'>Already have an account? Signin</Link>
               </form>
             </div>
           </div>
         </div>
-    
+   
   )
 }
 
