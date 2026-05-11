@@ -1,100 +1,86 @@
-import axios from 'axios'
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import axios from "axios";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Signin = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-// State
-const [email, setEmail] = useState("")
-const [password, setPassword] = useState("")
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const [loading, setLoading] = useState(false);
 
-const [error, setError] = useState("")
-const [success, setSuccess] = useState("")
-const [loading, setLoading] = useState(false)
+  const handleSignin = async (e) => {
+    e.preventDefault();
 
-// Signin function
-const handleSignin = async (e) => {
-e.preventDefault()
+    setError("");
+    setSuccess("");
+    setLoading(true);
 
-// reset messages
-setError("")
-setSuccess("")
-setLoading(true)
+    try {
+      const formData = new FormData();
+      formData.append("email", email);
+      formData.append("password", password);
 
-try {
-const formData = new FormData()
-formData.append("email", email)
-formData.append("password", password)
+      const response = await axios.post(
+        "https://wayneoryx.alwaysdata.net/api/signin",
+        formData
+      );
 
-const response = await axios.post(
-"https://wayneoryx.alwaysdata.net/api/signin",
-formData
-)
+      if (response.data.user) {
+        setSuccess(response.data.message);
+        localStorage.setItem("user", JSON.stringify(response.data.user));
+        window.location.href = "/";
+      } else {
+        setError(response.data.message);
+        setLoading(false);
+      }
+    } catch (err) {
+      setError("Something went wrong. Try again.");
+      setLoading(false);
+    }
+  };
 
-if (response.data.user) {
-setSuccess(response.data.message)
+  return (
+    <div className="login-page">
+      <div className="login-card">
 
-// save user
-localStorage.setItem("user", JSON.stringify(response.data.user))
+        <h2 className="login-title">Welcome Back</h2>
+        <p className="login-subtitle">Login to continue to ArtLoop</p>
 
-// reload app
-window.location.href = "/"
-} else {
-setError(response.data.message)
-setLoading(false)
-}
+        {success && <div className="alert success">{success}</div>}
+        {error && <div className="alert error">{error}</div>}
+        {loading && <div className="alert info">Signing you in...</div>}
 
-} catch (err) {
-setError("Something went wrong. Try again.")
-setLoading(false)
-}
-}
+        <form onSubmit={handleSignin} className="login-form">
 
-return (
-<div className='row justify-content-center'>
-<div className='custom-col'>
-<br /><br />
+          <input
+            type="email"
+            placeholder="Email address"
+            required
+            onChange={(e) => setEmail(e.target.value)}
+          />
 
-<div className='custom-card'>
-<h3 className='text-center'><b>Login</b></h3>
+          <input
+            type="password"
+            placeholder="Password"
+            required
+            onChange={(e) => setPassword(e.target.value)}
+          />
 
-{success && <h4 className="text-success">{success}</h4>}
-{error && <h4 className="text-danger">{error}</h4>}
-{loading && <h4 className="text-info">Please wait...</h4>}
+          <button type="submit" disabled={loading}>
+            {loading ? "Logging in..." : "Login"}
+          </button>
 
-<form onSubmit={handleSignin}>
-<input
-type="email"
-placeholder='Enter Email'
-className='form-control'
-required
-onChange={(e) => setEmail(e.target.value)}
-/>
-<br />
+        </form>
 
-<input
-type="password"
-placeholder='Enter password'
-className='form-control'
-required
-onChange={(e) => setPassword(e.target.value)}
-/>
-<br />
+        <p className="login-footer">
+          Don't have an account? <Link to="/signup">Sign up</Link>
+        </p>
 
-<input
-type="submit"
-value="Login"
-className='purchasee'
-disabled={loading}
-/>
-<br />
+      </div>
+    </div>
+  );
+};
 
-<Link to='/signup'>Dont have an account? Signup</Link>
-</form>
-</div>
-</div>
-</div>
-)
-}
-
-export default Signin
+export default Signin;

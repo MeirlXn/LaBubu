@@ -1,108 +1,122 @@
-import axios from 'axios'
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import axios from "axios";
+import React, { useState } from "react";
 
 const AddProduct = () => {
+  const [product_name, setProductName] = useState("");
+  const [product_photo, setProductPhoto] = useState(null);
+  const [preview, setPreview] = useState(null);
+  const [product_cost, setProductCost] = useState("");
+  const [product_description, setProductDescription] = useState("");
 
-   // declaring sate variables
-  const[product_name,setProductName]= useState("")
-  const[product_photo,setProductPhoto]= useState("")
-  const[product_cost,setProductCost]= useState("")
-  const[product_description,setProductDescription]= useState("")
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
-  // status messages
-  const[loading,setLoading] = useState("")
-  const[error,setError] = useState("")
-  const[success,setSuccess] = useState("")
+  // image preview
+  const handleImage = (e) => {
+    const file = e.target.files[0];
+    setProductPhoto(file);
+    setPreview(URL.createObjectURL(file));
+  };
 
-  // functoin to add products
-  const handleSubmit = async (e)=>{
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading("Please wait...");
-    try {
-      // retrieve product details
-      const formData = new FormData();
-      formData.append("product_name",product_name)
-      formData.append("product_description",product_description)
-      formData.append("product_cost",product_cost)
-      formData.append("product_photo",product_photo)
 
-      // posting data to base u rl(api)
-      const response = await axios.post("https://wayneoryx.alwaysdata.net/api/add_product",formData)
-      setLoading("")
-      setSuccess(response.data.success)
+    setLoading(true);
+    setError("");
+    setSuccess("");
+
+    try {
+      const formData = new FormData();
+      formData.append("product_name", product_name);
+      formData.append("product_description", product_description);
+      formData.append("product_cost", product_cost);
+      formData.append("product_photo", product_photo);
+
+      const response = await axios.post(
+        "https://wayneoryx.alwaysdata.net/api/add_product",
+        formData
+      );
+
+      setSuccess(response.data.success || "Artwork uploaded successfully 🎉");
+
+      // reset form
+      setProductName("");
+      setProductCost("");
+      setProductDescription("");
+      setProductPhoto(null);
+      setPreview(null);
     } catch (error) {
-      setError(error.message)
+      setError("Upload failed. Try again.");
+    } finally {
+      setLoading(false);
     }
-  }
+  };
 
   return (
-   
-    <div className='row justify-content-center'>
-      <p><b>Upload your handmade Art creation and bring it into the ArtLoop store collection.</b></p>
-      {error}
-      <br />
-      {success}
-      <br />
-      {loading}
-      <br />
-      <div className='custom-col'>
-        <div className='custom-card'>
-        <h3 className='text-center'><b>Add your Art</b></h3>
+    <div className="upload-page">
 
-        <form action="" onSubmit={handleSubmit}>
+      <div className="upload-title">
+        <h2>🎨 Upload Your Art</h2>
+        <p>Share your creativity with the ArtLoop community</p>
+      </div>
+
+      {error && <div className="alert error">{error}</div>}
+      {success && <div className="alert success">{success}</div>}
+      {loading && <div className="alert info">Uploading artwork...</div>}
+
+      <div className="upload-card">
+
+        {/* PREVIEW */}
+        {preview && (
+          <img src={preview} alt="preview" className="upload-preview" />
+        )}
+
+        <form onSubmit={handleSubmit} className="upload-form">
+
           <input
             type="text"
-            placeholder='Enter art name'
-            className='form-control'
+            placeholder="Art name"
             value={product_name}
-            onChange={(e)=> setProductName(e.target.value)}
+            onChange={(e) => setProductName(e.target.value)}
             required
           />
-          <br />
 
           <textarea
-            placeholder='Enter art description'
-            className='form-control'
+            placeholder="Art description"
             value={product_description}
-            onChange={(e)=> setProductDescription(e.target.value)}
+            onChange={(e) => setProductDescription(e.target.value)}
             required
           />
-          <br />
 
           <input
             type="number"
-            placeholder='Enter art cost'
-            className='form-control'
+            placeholder="Price (Ksh)"
             value={product_cost}
-            onChange={(e)=> setProductCost(e.target.value)}
+            onChange={(e) => setProductCost(e.target.value)}
             required
           />
-          <br />
-          <p><b>Note that 3% of price will be deducted for platform fees.</b></p>
 
           <input
             type="file"
-            placeholder='Enter art photo'
-            className='form-control'
-            accept='image/*'
-            onChange={(e)=> setProductPhoto(e.target.files[0])}
+            accept="image/*"
+            onChange={handleImage}
             required
           />
-          <br />
 
-          <input
-            type="submit"
-            value="Add Artwork"
-            className='purchasee'
-          />
-          <br />
+          <p className="fee-note">
+            ⚠ 3% platform fee will be deducted from sales
+          </p>
+
+          <button type="submit" disabled={loading}>
+            {loading ? "Uploading..." : "Upload Artwork"}
+          </button>
+
         </form>
-        </div>
+
       </div>
     </div>
-  )
-}
+  );
+};
 
-
-export default AddProduct
+export default AddProduct;

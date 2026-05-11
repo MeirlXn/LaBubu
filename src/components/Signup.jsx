@@ -1,105 +1,109 @@
-import axios from 'axios'
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import '../App.css';
-
+import axios from "axios";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import "../App.css";
 
 const Signup = () => {
-      // Declaring state variables
-  const [username,setUsername] = useState("")
-  const [email,setEmail] = useState("")
-  const [phone,setPhone] = useState("")
-  const [password,setPassword] = useState("")
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [password, setPassword] = useState("");
 
-  // Status messages
-  const[loading,setLoading] = useState("")
-  const[error,setError] = useState("")
-  const[success,setSuccess] = useState("")
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
-  // Function to signup
-  const submitSignupDetails = async(e)=>{
-    e.preventDefault()
-    setLoading("Please wait...")
+  const submitSignupDetails = async (e) => {
+    e.preventDefault();
+
+    setLoading(true);
+    setError("");
+    setSuccess("");
+
     try {
       const formData = new FormData();
-      formData.append("username",username);
-      formData.append("email",email);
-      formData.append("phone",phone);
-      formData.append("password",password);
+      formData.append("username", username);
+      formData.append("email", email);
+      formData.append("phone", phone);
+      formData.append("password", password);
 
-      // Adding base url
-      const response = await axios.post("https://wayneoryx.alwaysdata.net/api/signup",formData);
-      setSuccess(response.data.success)
-      setLoading("")
+      const response = await axios.post(
+        "https://wayneoryx.alwaysdata.net/api/signup",
+        formData
+      );
 
-      // Reset values
-      setPhone("")
-      setUsername("")
-      setEmail("")
-      setPassword("")
+      setSuccess(response.data.success || "Account created successfully 🎉");
 
-    } catch (error) {
-      setError(error.message)
-     
+      // reset fields
+      setUsername("");
+      setEmail("");
+      setPhone("");
+      setPassword("");
+    } catch (err) {
+      setError("Signup failed. Try again.");
+    } finally {
+      setLoading(false);
     }
-  }
+  };
 
   return (
-     <div className='row justify-content-center'>
-     
-          <div className='custom-col'>
-            <br /><br />
-            <div className='custom-card'>
-            <h3 className='text-center'><b>Signup</b></h3>
+    <div className="login-page">
+      <div className="login-card">
 
-              <form action="" onSubmit={submitSignupDetails}>                                  
-                  <input
-                    type="text"
-                    placeholder='Enter Username'
-                    className='form-control'
-                    onChange={(e)=>setUsername(e.target.value)}
-                   />
-                   <br />    
-             
-                  <input
-                    type="tel"
-                    placeholder='Enter Phonenumber'
-                    className='form-control'
-                    onChange={(e)=>setPhone(e.target.value)}
-                  />
-                  <br />
-               
-                  <input
-                    type="email"
-                    placeholder='Enter Email'
-                    className='form-control'
-                    onChange={(e)=>setEmail(e.target.value)}
-                  />
-                  <br />
-                 
-                  <input
-                    type="password"
-                    placeholder='Enter Password'
-                    className='form-control'
-                    onChange={(e)=>setPassword(e.target.value)}
-                  />
-                  <br />
-                 
-                  <input
-                    type="submit"
-                    value="Done"
-                    className='purchasee'
-                  />
-                  <br />
-             
-                  {/* incase someone has an account */}
-                  <Link to='/signin'>Already have an account? Signin</Link>
-              </form>
-            </div>
-          </div>
-        </div>
-   
-  )
-}
+        <h2 className="login-title">Create Account ✨</h2>
+        <p className="login-subtitle">Join ArtLoop and start sharing art</p>
 
-export default Signup
+        {success && <div className="alert success">{success}</div>}
+        {error && <div className="alert error">{error}</div>}
+        {loading && <div className="alert info">Creating account...</div>}
+
+        <form onSubmit={submitSignupDetails} className="login-form">
+
+          <input
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+
+          <input
+            type="tel"
+            placeholder="Phone number"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            required
+          />
+
+          <input
+            type="email"
+            placeholder="Email address"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+
+          <button type="submit" disabled={loading}>
+            {loading ? "Creating..." : "Sign Up"}
+          </button>
+
+        </form>
+
+        <p className="login-footer">
+          Already have an account? <Link to="/signin">Login</Link>
+        </p>
+
+      </div>
+    </div>
+  );
+};
+
+export default Signup;
